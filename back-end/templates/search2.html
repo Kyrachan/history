@@ -1,0 +1,15 @@
+<html>
+<head>
+<title>my web history - web app</title>
+</head>
+
+<body>
+<h1>you searched for: {{term}}</h1>
+<ul>
+	{% for t in terms %}
+		<li>{{ t }}</li>
+	{% endfor %}
+</ul>
+</body>
+
+</html>
