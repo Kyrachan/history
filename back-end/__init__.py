@@ -6,6 +6,7 @@ from settings import APP_STATIC
 import os
 import json
 from flask.ext.cors import CORS
+from eroder import delete_word, read_state
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -129,6 +130,12 @@ def getTermAt(position):
     result = historyObj.getTermAt(position)
     return result
 
+
+@app.route('/deleteTermAt/<position>')
+def deleteTermAt(position):
+    fileContents = read_state()
+    delete_word(fileContents, position)
+    return ''
 
 @app.route('/search/<term>')
 def search(term):

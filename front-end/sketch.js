@@ -162,6 +162,9 @@ function mousePressed() {
                 var termAtAddress = serverAddress.concat("/getTermAt/");
                 termAtAddress = termAtAddress.concat(String(searchTermIdx));
                 result = loadStrings(termAtAddress, getTermAtCallback);
+                var deleteAtAddress = serverAddress.concat("/deleteTermAt/");
+                deleteAtAddress = deleteAtAddress.concat(String(searchTermIdx));
+                loadStrings(deleteAtAddress, deleteTermAtCallback);
             } else {
                 currentTermUnderMouse = previousTermUnderMouse;
             }
@@ -179,6 +182,14 @@ function getTermAtCallback() {
 
     searchTermLocY = Math.ceil(searchTermIdx / entriesPerRow);
     searchTermLocY = searchTermLocY * entrySideLength + topMargin;
+}
+
+//***** DELETE TERM AT *****//
+function deleteTermAtCallback() {
+    tempLastWord = loadStrings(lastWordAddress, getLastWord);
+    tempLastWordTimeStamp = loadStrings(lastWordTimeStampAddress, getLastWordTimeStamp);
+    tempHistoryState = loadStrings(historyAddress, getHistoryState);
+    drawHistoryState();
 }
 
 //***** DRAW TERM UNDER MOUSE *****//
