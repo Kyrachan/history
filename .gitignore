@@ -1,3 +1,4 @@
 back-end/static/
 *.pyc
+*.log
 back-end/FILE.txt
