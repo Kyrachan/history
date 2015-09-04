@@ -38,8 +38,11 @@ function setup() {
 function draw() {
     drawHistoryState();
     drawTermUnderMouse();
+    drawInfoButton();
+
     textSize(50);
     fill(255);
+    textFont('Roboto Slab');
 
     if (frameCount%autoSelectFrequency==0 && frameCount>0) {
         autoSelect();
@@ -54,6 +57,54 @@ function draw() {
         tempLastWordTimeStamp = loadStrings(lastWordTimeStampAddress, getLastWordTimeStamp);
     }
 };
+
+//***** INFO BUTTON *******//
+function drawInfoButton() {
+    var distance = dist(mouseX, mouseY, width-30, height-30);
+    //if the distance is less than the circle's radius
+    if(distance < 14) {
+        isOverCircle = true;
+    } else {
+        isOverCircle = false;
+    }
+
+    //draw a circle
+    //ellipseMode(CENTER);
+
+    if(isOverCircle == true) {
+        cursor(HAND);
+        drawRevealText();
+    } else {
+        cursor(ARROW);
+    }
+
+    //fill(255);
+    //ellipse(200, 200, 100, 100);
+    fill(255);
+    //noStroke();
+    smooth();
+    ellipse(width-30, height-30, 28, 28);
+    fill(0);
+    textSize(23);
+    textFont('Roboto Slab');
+    text ("i",width-34, height-22);
+}
+
+//***** REVEAL TEXT *******//
+function  drawRevealText(){
+    s = "This website is part of the interactive installation: Deletion process_Only you can see my history. The work comments on digital privacy, the right to be forgotten and the control and distribution of personal data. The work is based on the artist's Google search history between 2008 and 2013. Most of these searches are personal and rather banal, at the same time however, this search history composes a rich and detailed user profile on Google's data centers. 10.650 terms which the artist searched for during the last eight years, have been downloaded from her personal search history, stored locally and depicted as white squares on a webpage. An eroding process accesses this search history and deletes one random word for ever, turning the respective white square into a black one. At the same time the deleted word is printed on paper turning the digital archive into a physical one. At the end of the process all terms will have been deleted and this webpage will be completely black. The printed paper will be the only remnant of the personal web search history. The installation was presented in May 2015 in Athens Digital Art Festival. For more information on kyriakigoni.com";
+
+    textSize(18);
+
+    textFont('Roboto Slab');
+    fill(0);
+    rect(width/3,height/3,740, 350);
+    fill(255,255,255);
+    //fill(255);
+    textLeading(20);
+
+    text(s, width/3+20,height/3+20, 710, 310); // Text wraps within text box
+}
 
 //***** AUTOSELECT TERM *******//
 function autoSelect() {
